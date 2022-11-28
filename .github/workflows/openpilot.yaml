@@ -6,7 +6,7 @@ env:
   ZIP: |
     cd $GITHUB_WORKSPACE/build/bin
     export PATH=/usr/local/opt/gnu-tar/libexec/gnubin:$PATH
-    sudo tar -czf $(uname -s)-$(uname -m).tar.gz plotjuggler libDataLoadRlog.* libDataStreamCereal.*
+    sudo tar -czf $(uname -s)-$(uname -m).tar.gz plotjuggler libDataLoadRlog.* libDataStreamCereal.* libPublisherVideoViewer.*
 
 jobs:
   build_ubuntu:
@@ -41,6 +41,7 @@ jobs:
       with:
         python-version: '3.8.x'
     - name: setup dependencies
+      # TODO what is a mac libqtav
       run: |
         brew install cmake bzip2 capnp qt@5 zeromq protobuf gnu-tar
         sudo pip3 install --no-cache-dir -r 3rdparty/opendbc/requirements.txt
