@@ -88,6 +88,29 @@ VideoDialog::VideoDialog(QWidget *parent) :
   _label = new ImageLabel(this);
   ui->verticalLayoutMain->addWidget(_label, 1.0);
   _label->setHidden(true);
+  commaJuggleLoad();
+}
+
+VideoDialog::commaJuggleLoad()
+{
+  QSettings settings;
+  const char * videoPath = std::getenv("VIDEOPATH")
+  const char * referenceCurve = std::getenv("VIDEOREFCURVE")
+  if (!videoPath || !referenceCurve)
+  {
+    return;
+  }
+
+  QString filename = videoPath;
+  if (!loadFile(filename))
+  {
+    return;
+  }
+  QString directory_path =
+      QFileInfo(filename).absolutePath().toString();
+
+  settings.setValue("VideoDialog.loadDirectory", directory_path);
+  // TODO how to set ui linereferencecurve thing
 }
 
 VideoDialog::~VideoDialog()
