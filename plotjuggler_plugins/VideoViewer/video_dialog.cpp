@@ -111,6 +111,7 @@ void VideoDialog::commaJuggleLoad()
 
   settings.setValue("VideoDialog.loadDirectory", directory_path);
   // TODO how to set ui linereferencecurve thing
+  ui->lineEditReference->setText(referenceCurve);
 }
 
 VideoDialog::~VideoDialog()
