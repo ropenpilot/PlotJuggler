@@ -91,11 +91,11 @@ VideoDialog::VideoDialog(QWidget *parent) :
   commaJuggleLoad();
 }
 
-VideoDialog::commaJuggleLoad()
+void VideoDialog::commaJuggleLoad()
 {
   QSettings settings;
-  const char * videoPath = std::getenv("VIDEOPATH")
-  const char * referenceCurve = std::getenv("VIDEOREFCURVE")
+  const char * videoPath = std::getenv("VIDEOPATH");
+  const char * referenceCurve = std::getenv("VIDEOREFCURVE");
   if (!videoPath || !referenceCurve)
   {
     return;
@@ -107,7 +107,7 @@ VideoDialog::commaJuggleLoad()
     return;
   }
   QString directory_path =
-      QFileInfo(filename).absolutePath().toString();
+      QFileInfo(filename).absolutePath();
 
   settings.setValue("VideoDialog.loadDirectory", directory_path);
   // TODO how to set ui linereferencecurve thing
