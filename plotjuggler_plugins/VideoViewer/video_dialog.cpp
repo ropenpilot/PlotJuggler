@@ -96,6 +96,8 @@ void VideoDialog::commaJuggleLoad()
   QSettings settings;
   const char * videoPath = std::getenv("VIDEOPATH");
   const char * referenceCurve = std::getenv("VIDEOREFCURVE");
+  // TODO loadFile doesnt seem to change the text in the ui to the right path
+  // TODO frameid doesnt work for ref curve unless doing full route
   if (!videoPath || !referenceCurve)
   {
     return;
