@@ -121,6 +121,8 @@ void PublisherVideo::commaLoadVideoFromEnvironment()
 
   if (!videoPath || !referenceCurve)
   {
+    settings.setValue("VideoDialog::video_file", "");
+    settings.setValue("VideoDialog::curve_name", "");
     return;
   }
 
