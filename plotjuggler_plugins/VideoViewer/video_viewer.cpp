@@ -120,8 +120,6 @@ bool PublisherVideo::commaLoadVideoFromEnvironment()
   QSettings settings;
   const char * videoPath = std::getenv("VIDEO_PATH");
   const char * referenceCurve = std::getenv("VIDEO_REFERENCE_CURVE");
-  QString directory_path =
-      settings.value("VideoDialog.loadDirectory", QDir::currentPath()).toString();
 
   if (!videoPath || !referenceCurve)
   {
@@ -131,14 +129,11 @@ bool PublisherVideo::commaLoadVideoFromEnvironment()
   QString filename = videoPath;
   QString curve = referenceCurve;
 
-  directory_path = QFileInfo(filename).absolutePath();
+  QString directory_path = QFileInfo(filename).absolutePath();
   std::printf("shitshityay2\n");
   std::printf("%s\t%s\n", videoPath, referenceCurve);
   settings.setValue("VideoDialog::loadDirectory", directory_path);
-  settings.setValue("VideoDialog.loadDirectory", directory_path);
   settings.setValue("VideoDialog::video_file", filename);
   settings.setValue("VideoDialog::curve_name", curve);
-  settings.setValue("VideoDialog.video_file", filename);
-  settings.setValue("VideoDialog.curve_name", curve);
   return true;
 }
