@@ -43,7 +43,7 @@ public slots:
 
 private:
 
-  void commaLoadVideoFromEnvironment();
+  bool commaLoadVideoFromEnvironment();
 
   bool _enabled = false;
   bool _xml_loaded = false;

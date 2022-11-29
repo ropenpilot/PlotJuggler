@@ -1,5 +1,7 @@
 #include <QTextStream>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QMessageBox>
 #include <QSettings>
 #include "video_viewer.h"
@@ -86,14 +88,15 @@ bool PublisherVideo::xmlLoadState(const QDomElement &parent_element)
 
 void PublisherVideo::setEnabled(bool enabled)
 {
+  const bool useCommaVideo = commaLoadVideoFromEnvironment();
   QSettings settings;
   auto ui = _dialog->ui;
   if(enabled)
   {
-    if( !_xml_loaded )
+    if( !_xml_loaded  || useCommaVideo)
     {
       QString filename = settings.value("VideoDialog::video_file", "").toString();
-      if(filename != ui->lineFilename->text())
+      if(filename != ui->lineFilename->text() || useCommaVideo)
       {
         _dialog->loadFile(filename);
       }
@@ -113,19 +116,37 @@ void PublisherVideo::setEnabled(bool enabled)
   }
 }
 
-void PublisherVideo::commaLoadVideoFromEnvironment()
+bool PublisherVideo::commaLoadVideoFromEnvironment()
 {
   QSettings settings;
   const char * videoPath = std::getenv("VIDEO_PATH");
   const char * referenceCurve = std::getenv("VIDEO_REFERENCE_CURVE");
+  QString directory_path =
+      settings.value("VideoDialog.loadDirectory", QDir::currentPath()).toString();
 
   if (!videoPath || !referenceCurve)
   {
-    settings.setValue("VideoDialog::video_file", "");
-    settings.setValue("VideoDialog::curve_name", "");
-    return;
+    return false;
+    //std::printf("shitshit1\n");
+    //settings.setValue("VideoDialog::video_file", "");
+    //settings.setValue("VideoDialog::curve_name", "");
+    //settings.setValue("VideoDialog.video_file", "");
+    //settings.setValue("VideoDialog.curve_name", "");
+    //settings.setValue("VideoDialog.loadDirectory", directory_path);
+    //settings.setValue("VideoDialog::loadDirectory", directory_path);
   }
 
-  settings.setValue("VideoDialog::video_file", videoPath);
-  settings.setValue("VideoDialog::curve_name", referenceCurve);
+  QString filename = videoPath;
+  QString curve = referenceCurve;
+
+  directory_path = QFileInfo(filename).absolutePath();
+  std::printf("shitshityay2\n");
+  std::printf("%s\t%s\n", videoPath, referenceCurve);
+  settings.setValue("VideoDialog::loadDirectory", directory_path);
+  settings.setValue("VideoDialog.loadDirectory", directory_path);
+  settings.setValue("VideoDialog::video_file", filename);
+  settings.setValue("VideoDialog::curve_name", curve);
+  settings.setValue("VideoDialog.video_file", filename);
+  settings.setValue("VideoDialog.curve_name", curve);
+  return true;
 }
