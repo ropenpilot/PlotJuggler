@@ -8,7 +8,6 @@
 
 PublisherVideo::PublisherVideo()
 {
-  commaLoadVideoFromEnvironment();
   _dialog = new VideoDialog(nullptr);
   connect(_dialog, &VideoDialog::closed, this, [this]()
           {
@@ -127,13 +126,6 @@ bool PublisherVideo::commaLoadVideoFromEnvironment()
   if (!videoPath || !referenceCurve)
   {
     return false;
-    //std::printf("shitshit1\n");
-    //settings.setValue("VideoDialog::video_file", "");
-    //settings.setValue("VideoDialog::curve_name", "");
-    //settings.setValue("VideoDialog.video_file", "");
-    //settings.setValue("VideoDialog.curve_name", "");
-    //settings.setValue("VideoDialog.loadDirectory", directory_path);
-    //settings.setValue("VideoDialog::loadDirectory", directory_path);
   }
 
   QString filename = videoPath;
