@@ -4,8 +4,11 @@
 #include <QSettings>
 #include "video_viewer.h"
 
+
+
 PublisherVideo::PublisherVideo()
 {
+  commaLoadVideoFromEnvironment();
   _dialog = new VideoDialog(nullptr);
   connect(_dialog, &VideoDialog::closed, this, [this]()
           {
@@ -110,4 +113,23 @@ void PublisherVideo::setEnabled(bool enabled)
     settings.setValue("VideoDialog::geometry", _dialog->saveGeometry());
     _dialog->hide();
   }
+}
+
+void PublisherVideo::commaLoadVideoFromEnvironment()
+{
+  QSettings settings;
+  const char * videoPath = std::getenv("VIDEO_PATH");
+  const char * referenceCurve = std::getenv("VIDEO_REFERENCE_CURVE");
+
+  std::printf("vid: %s\n", videoPath);
+  std::printf("refc: %s\n", referenceCurve);
+
+  if (!videoPath || !referenceCurve)
+  {
+    std::printf("hmmm1");
+    return;
+  }
+
+  settings.setValue("VideoDialog::video_file", videoPath);
+  settings.setValue("VideoDialog::curve_name", referenceCurve);
 }

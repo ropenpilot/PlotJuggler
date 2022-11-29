@@ -102,8 +102,6 @@ private:
   };
   std::vector<CompressedFrame> _compressed_frames;
 
-  void commaJuggleLoad();
-
   bool eventFilter(QObject* obj, QEvent* ev);
   QString _dragging_curve;
 
