@@ -4,8 +4,6 @@
 #include <QSettings>
 #include "video_viewer.h"
 
-
-
 PublisherVideo::PublisherVideo()
 {
   commaLoadVideoFromEnvironment();
@@ -121,12 +119,8 @@ void PublisherVideo::commaLoadVideoFromEnvironment()
   const char * videoPath = std::getenv("VIDEO_PATH");
   const char * referenceCurve = std::getenv("VIDEO_REFERENCE_CURVE");
 
-  std::printf("vid: %s\n", videoPath);
-  std::printf("refc: %s\n", referenceCurve);
-
   if (!videoPath || !referenceCurve)
   {
-    std::printf("hmmm1");
     return;
   }
 

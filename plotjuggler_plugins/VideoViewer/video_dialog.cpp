@@ -114,7 +114,6 @@ bool VideoDialog::loadFile(QString filename)
     _label->setHidden(true);
     return true;
   }
-    std::printf("hmmm4");
   return false;
 }
 

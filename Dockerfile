@@ -21,7 +21,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libqt5svg5-dev \
   libqt5websockets5-dev \
   libqt5opengl5-dev \
-  libqt5opengl5-dev \
   libqt5x11extras5-dev \
 
   # opendbc/cereal
