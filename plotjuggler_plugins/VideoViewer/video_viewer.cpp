@@ -95,7 +95,7 @@ void PublisherVideo::setEnabled(bool enabled)
     if( !_xml_loaded  || useCommaVideo)
     {
       QString filename = settings.value("VideoDialog::video_file", "").toString();
-      if(filename != ui->lineFilename->text() || useCommaVideo)
+      if(filename != ui->lineFilename->text())
       {
         _dialog->loadFile(filename);
       }
